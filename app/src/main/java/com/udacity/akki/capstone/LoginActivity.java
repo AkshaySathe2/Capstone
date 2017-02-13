@@ -1,12 +1,14 @@
 package com.udacity.akki.capstone;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import com.udacity.akki.capstone.activity.LandingActivity;
 import com.udacity.akki.capstone.utility.Util;
 
 import butterknife.BindView;
@@ -36,8 +38,10 @@ public class LoginActivity extends AppCompatActivity {
         String password=edtPassword.getText().toString();
         if(Util.isStringNullOrEmpty(userName) || Util.isStringNullOrEmpty(password) ){
             Util.showToast(mContext,"UserName/ Password cannot be empty !");
-        }else{
-
+        }else if(userName.equals("Akki") && password.equals("Akki")){
+            Intent intent=new Intent(mContext, LandingActivity.class);
+            startActivity(intent);
+            finish();
         }
 
 

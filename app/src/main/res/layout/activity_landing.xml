@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_landing"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.udacity.akki.capstone.activity.LandingActivity">
+
+    <RelativeLayout style="@style/Layout_wMPhMP">
+
+        <LinearLayout
+            style="@style/Layout_wMPhWC"
+            android:baselineAligned="false"
+            android:weightSum="2"
+            android:id="@+id/rel_fees_test">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:id="@+id/rel_fees">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hi" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/rel_test"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hi" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/toolbar" />
+
+</LinearLayout>
