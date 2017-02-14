@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.GetTokenResult;
+
 /**
  * Created by 836158 on 09-02-2017.
  */
@@ -39,6 +42,27 @@ public class Util {
         SharedPreferences instance = getSharedPreferenceInstance(context);
         return instance.getString("Password", "");
     }
+
+    public static void setUid(Context context, String uid) {
+        SharedPreferences.Editor editor = getSharedPreferenceEditor(context);
+        editor.putString("UID", uid).commit();
+    }
+
+    public static String getUid(Context context) {
+        SharedPreferences instance = getSharedPreferenceInstance(context);
+        return instance.getString("UID", "");
+    }
+
+    public static void setToken(Context context, String token) {
+        SharedPreferences.Editor editor = getSharedPreferenceEditor(context);
+        editor.putString("AuthToken", token).commit();
+    }
+
+    public static String getToken(Context context) {
+        SharedPreferences instance = getSharedPreferenceInstance(context);
+        return instance.getString("AuthToken", "");
+    }
+
 
     public static Boolean isStringNullOrEmpty(String str) {
         return str == null || str.trim().equals("");

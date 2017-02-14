@@ -7,8 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.udacity.akki.capstone.activity.LandingActivity;
 import com.udacity.akki.capstone.utility.Util;
 
@@ -25,11 +28,29 @@ public class SplashScreenActivity extends AppCompatActivity {
         Intent intent = null;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            intent = new Intent(mContext, LandingActivity.class);
+            Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+            Util.setUid(mContext,user.getUid());
+            user.getToken(true)
+                    .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                        public void onComplete(@NonNull Task<GetTokenResult> task) {
+                            if (task.isSuccessful()) {
+                                String idToken = task.getResult().getToken();
+                                // Send token to your backend via HTTPS
+                                // ...
+                                Util.setToken(mContext,idToken);
+                                Util.showToast(mContext,"Logged in successfully.");
+                                Intent intent=new Intent(mContext,LandingActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // Handle error -> task.getException();
+                            }
+                        }
+                    });
         } else {
             intent = new Intent(mContext, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
-        startActivity(intent);
-        finish();
     }
 }

@@ -1,6 +1,7 @@
 package com.udacity.akki.capstone.network;
 
 import com.udacity.akki.capstone.HomePageParameters;
+import com.udacity.akki.capstone.model.User;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -19,7 +20,7 @@ public interface ApiInterface {
     @GET("movie/{id}")
     Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);*/
 
-    @GET("users/{id}")
-    Call<String> getEntireData(@Path("id") String id);
+    @GET("Users/{uid}.json")
+    Call<User> getUserData(@Path("uid") String uid,@Query("auth") String token);
 
 }

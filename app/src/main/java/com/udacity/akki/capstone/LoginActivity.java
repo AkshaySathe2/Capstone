@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.udacity.akki.capstone.activity.LandingActivity;
 import com.udacity.akki.capstone.utility.Util;
 
@@ -50,13 +51,31 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     // User is signed in
                     Log.d(LOG_TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    Util.showToast(mContext,"Welcome "+user.getDisplayName());
-                    Intent intent=new Intent(mContext,LandingActivity.class);
-                    startActivity(intent);
-                    finish();
+                    Util.setUid(mContext,user.getUid());
+                    user.getToken(true)
+                            .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                    if (task.isSuccessful()) {
+                                        String idToken = task.getResult().getToken();
+                                        // Send token to your backend via HTTPS
+                                        // ...
+                                        Util.setToken(mContext,idToken);
+                                        Util.showToast(mContext,"Logged in successfully.");
+                                        Intent intent=new Intent(mContext,LandingActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        // Handle error -> task.getException();
+                                    }
+                                }
+                            });
+
+                    //
+
                 } else {
                     // User is signed out
                     Log.d(LOG_TAG, "onAuthStateChanged:signed_out");
+                    Util.showToast(mContext,"User signed out.");
                 }
                 // ...
             }
@@ -64,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
     }
+
+
 
     @Override
     public void onStart() {
