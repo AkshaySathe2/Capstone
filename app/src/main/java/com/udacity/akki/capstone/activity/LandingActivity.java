@@ -30,15 +30,15 @@ public class LandingActivity extends AppCompatActivity {
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
-        Call<HomePageParameters> call = apiService.getHomeData(Util.getUserName(mContext));
-        call.enqueue(new Callback<HomePageParameters>() {
+        Call<String> call = apiService.getEntireData(Util.getUserName(mContext));
+        call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<HomePageParameters>call, Response<HomePageParameters> response) {
-                HomePageParameters home = response.body();
+            public void onResponse(Call<String>call, Response<String> response) {
+                String home = response.body();
             }
 
             @Override
-            public void onFailure(Call<HomePageParameters>call, Throwable t) {
+            public void onFailure(Call<String>call, Throwable t) {
                 // Log error here since request failed
                 Log.e(LOG_TAG, t.toString());
             }

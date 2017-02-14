@@ -19,7 +19,7 @@ public interface ApiInterface {
     @GET("movie/{id}")
     Call<MoviesResponse> getMovieDetails(@Path("id") int id, @Query("api_key") String apiKey);*/
 
-    @GET("user/{id}/home")
-    Call<HomePageParameters> getHomeData(@Path("id") String id);
+    @GET("users/{id}")
+    Call<String> getEntireData(@Path("id") String id);
 
 }

@@ -2,10 +2,14 @@ package com.udacity.akki.capstone;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.udacity.akki.capstone.activity.LandingActivity;
 import com.udacity.akki.capstone.utility.Util;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -18,12 +22,14 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         mContext = SplashScreenActivity.this;
-        String userName = Util.getUserName(mContext);
-        String password = Util.getPassword(mContext);
-        Log.d(LOG_TAG, "User name :"+userName+" and Password :"+password);
-        if(Util.isStringNullOrEmpty(userName) || Util.isStringNullOrEmpty(password)){
-            Intent intent=new Intent(mContext,LoginActivity.class);
-            startActivity(intent);
+        Intent intent = null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            intent = new Intent(mContext, LandingActivity.class);
+        } else {
+            intent = new Intent(mContext, LoginActivity.class);
         }
+        startActivity(intent);
+        finish();
     }
 }
