@@ -12,40 +12,33 @@ public class Installment {
 
     private String date;
 
-    public String getAmount ()
-    {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount (String amount)
-    {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
-    public String getStatus ()
-    {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus (String status)
-    {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String getDate ()
-    {
+    public String getDate() {
         return date;
     }
 
-    public void setDate (String date)
-    {
+    public void setDate(String date) {
         this.date = date;
     }
 
     @Override
-    public String toString()
-    {
-        return "ClassPojo [amount = "+amount+", status = "+status+", date = "+date+"]";
+    public String toString() {
+        return "ClassPojo [amount = " + amount + ", status = " + status + ", date = " + date + "]";
     }
 
 }

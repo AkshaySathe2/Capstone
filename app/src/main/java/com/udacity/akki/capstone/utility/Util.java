@@ -68,8 +68,12 @@ public class Util {
         return str == null || str.trim().equals("");
     }
 
-    public static void showToast(Context context,String message){
-        Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
+    public static void showToast(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static String encapsulateInQuotes(String message) {
+        return "\"" + message + "\"";
     }
 
 }
