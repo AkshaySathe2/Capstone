@@ -36,4 +36,8 @@ public class Notification {
         return "ClassPojo [message = "+message+", id = "+id+"]";
     }
 
+    public Notification(String message, String id) {
+        this.message = message;
+        this.id = id;
+    }
 }
