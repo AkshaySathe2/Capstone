@@ -1,25 +1,22 @@
 package com.udacity.akki.capstone.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.udacity.akki.capstone.HomePageParameters;
 import com.udacity.akki.capstone.LoginActivity;
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.adapter.NotificationSlidePagerAdapter;
+import com.udacity.akki.capstone.fragment.FeesFragment;
 import com.udacity.akki.capstone.model.Installment;
 import com.udacity.akki.capstone.model.Notification;
 import com.udacity.akki.capstone.model.User;
@@ -27,7 +24,6 @@ import com.udacity.akki.capstone.network.ApiClient;
 import com.udacity.akki.capstone.network.ApiInterface;
 import com.udacity.akki.capstone.utility.Util;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -48,14 +44,16 @@ public class LandingActivity extends AppCompatActivity {
     @BindView(R.id.txt_fees_value) TextView feesValue;
     @BindView(R.id.txt_fees_date) TextView feesDate;
     User user;
-
+    ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
         ButterKnife.bind(this);
         mContext = LandingActivity.this;
-
+        dialog=new ProgressDialog(mContext);
+        dialog.setMessage("Loading Data. Please Wait...");
+        dialog.show();
         // Write a message to the database
         /*FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
@@ -88,10 +86,26 @@ public class LandingActivity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.card_fees)
+    public void viewFees(View view) {
+        if(user!=null && user.getDetail().getFees()!=null){
+            Fragment fragmentS1 = new FeesFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
+        }else{
+            Util.showToast(mContext,"No Fees Data Available");
+        }
+    }
+
 
     private void logoutUser(Context context) {
         startActivity(new Intent(context, LoginActivity.class));
         finish();
+    }
+
+    private void dismissDialog(){
+        if(dialog!=null && dialog.isShowing()){
+            dialog.dismiss();
+        }
     }
 
     private void updateUI() {
@@ -109,6 +123,8 @@ public class LandingActivity extends AppCompatActivity {
         autoSwipeNotifications();
 
 
+        //Called after everything is loaded
+        dismissDialog();
     }
 
     private void populateFees(Installment installment) {
