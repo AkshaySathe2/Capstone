@@ -19,6 +19,7 @@ import com.udacity.akki.capstone.adapter.NotificationSlidePagerAdapter;
 import com.udacity.akki.capstone.fragment.FeesFragment;
 import com.udacity.akki.capstone.model.Installment;
 import com.udacity.akki.capstone.model.Notification;
+import com.udacity.akki.capstone.model.Test;
 import com.udacity.akki.capstone.model.User;
 import com.udacity.akki.capstone.network.ApiClient;
 import com.udacity.akki.capstone.network.ApiInterface;
@@ -43,8 +44,11 @@ public class LandingActivity extends AppCompatActivity {
     @BindView(R.id.vp_notifications) ViewPager mPager;
     @BindView(R.id.txt_fees_value) TextView feesValue;
     @BindView(R.id.txt_fees_date) TextView feesDate;
-    User user;
-    ProgressDialog dialog;
+    @BindView(R.id.txt_test_date) TextView testDate;
+    @BindView(R.id.txt_test_name) TextView testName;
+    @BindView(R.id.txt_test_score) TextView testScore;
+    private User user;
+    private ProgressDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,14 +121,27 @@ public class LandingActivity extends AppCompatActivity {
         }
 
         //Populating notifications
-        PagerAdapter mPagerAdapter = null;
+        PagerAdapter mPagerAdapter;
         mPagerAdapter = new NotificationSlidePagerAdapter(mContext, populateNotifications(user));
         mPager.setAdapter(mPagerAdapter);
         autoSwipeNotifications();
 
+        //Populating Test
+        Test test=user.getDetail().getLatestTestScores();
+        if(test!=null){
+            populateTest(test);
+        }
+
+
 
         //Called after everything is loaded
         dismissDialog();
+    }
+
+    private void populateTest(Test test) {
+        testName.setText(test.getTopic());
+        testDate.setText(test.getDoa());
+        testScore.setText(test.getMarksObtained()+" / "+test.getMaxMarks());
     }
 
     private void populateFees(Installment installment) {

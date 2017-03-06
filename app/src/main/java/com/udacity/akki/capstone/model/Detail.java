@@ -52,6 +52,21 @@ public class Detail {
     public String toString() {
         return "ClassPojo [test = " + test + ", attendance = " + attendance + ", notification = " + notification + ", fees = " + fees + "]";
     }
+
+    public Test getLatestTestScores() {
+        Test latestTest = null;
+        for (Test t : test) {
+            if (latestTest == null) {
+                    latestTest = t;
+
+            } else {
+                if (!t.compareDate(latestTest.getDoa())) {
+                    latestTest=t;
+                }
+            }
+        }
+        return latestTest;
+    }
 }
 
 
