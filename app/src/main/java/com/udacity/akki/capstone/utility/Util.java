@@ -8,11 +8,18 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.GetTokenResult;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by 836158 on 09-02-2017.
  */
 
 public class Util {
+
+    public static final String DD_MM_YYYY = "dd-MM-yyyy";
+    public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
     private static SharedPreferences.Editor getSharedPreferenceEditor(Context mContext) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
@@ -70,6 +77,24 @@ public class Util {
 
     public static void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static String formatDate(Date originalDate, String format) {
+        SimpleDateFormat sdf2 = null;
+        switch (format) {
+            case DD_MM_YYYY:
+                sdf2 = new SimpleDateFormat(DD_MM_YYYY, Locale.ENGLISH);
+                break;
+            case YYYY_MM_DD:
+                sdf2 = new SimpleDateFormat(YYYY_MM_DD, Locale.ENGLISH);
+                break;
+            default:
+                break;
+        }
+        if (sdf2 != null) {
+            return sdf2.format(originalDate);
+        }
+        return "";
     }
 
     public static String encapsulateInQuotes(String message) {

@@ -93,7 +93,8 @@ public class LandingActivity extends AppCompatActivity {
     @OnClick(R.id.card_fees)
     public void viewFees(View view) {
         if(user!=null && user.getDetail().getFees()!=null){
-            Fragment fragmentS1 = new FeesFragment();
+            FeesFragment fragmentS1 = new FeesFragment();
+            fragmentS1.setFees(user.getDetail().getFees());
             getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
         }else{
             Util.showToast(mContext,"No Fees Data Available");
@@ -132,7 +133,7 @@ public class LandingActivity extends AppCompatActivity {
             populateTest(test);
         }
 
-
+        //Track My Bus
 
         //Called after everything is loaded
         dismissDialog();

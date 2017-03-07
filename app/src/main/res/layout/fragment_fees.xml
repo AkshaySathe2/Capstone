@@ -2,12 +2,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.udacity.akki.capstone.fragment.FeesFragment"
-    android:background="#ffffff">
+    android:background="#ffffff"
+    tools:context="com.udacity.akki.capstone.fragment.FeesFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <LinearLayout
+        style="@style/Layout_wMPhMP"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            style="@style/Layout_wMPhWC"
+            android:layout_margin="5dp"
+            android:background="@color/color_fees"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                style="@style/Layout_wMPhWC"
+                android:layout_margin="5dp"
+                android:baselineAligned="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/next_installment_dated" />
+
+                    <TextView
+                        android:id="@+id/txt_fees_date"
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/na" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/pay_u20b9" />
+
+                    <TextView
+                        android:id="@+id/txt_fees_value"
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/na" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Layout_wMPhWC"
+                android:layout_margin="5dp"
+                android:baselineAligned="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="TOTAL : " />
+
+                    <TextView
+                        android:id="@+id/txt_total"
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="NA" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/paid" />
+
+                    <TextView
+                        android:id="@+id/txt_paid"
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/na" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/remaining" />
+
+                    <TextView
+                        android:id="@+id/txt_remaining"
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/na" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_fees_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
 
 </FrameLayout>

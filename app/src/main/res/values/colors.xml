@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="color_fees">#87CEEB</color>
+    <color name="color_fees_status_paid">#45B3E0</color>
+    <color name="color_fees_status_pending">#EBA487</color>
+    <color name="white">#ffffff</color>
+    <color name="color_fees_row_background">#dbf0f9</color>
+    <color name="dark_gray">#555555</color>
 </resources>

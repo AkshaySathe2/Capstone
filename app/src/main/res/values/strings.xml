@@ -26,4 +26,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="due_on">due on</string>
     <string name="test_record">Test Record</string>
+    <string name="next_installment_dated">Next Installment Dated</string>
+    <string name="pay_u20b9">Pay ₹</string>
+    <string name="remaining">REMAINING :</string>
+    <string name="paid">PAID :</string>
+    <string name="no_data_available">No data available</string>
 </resources>

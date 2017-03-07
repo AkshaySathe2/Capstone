@@ -9,4 +9,6 @@
     android:elevation="@dimen/toolbar_elevation"
     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    android:title="@string/app_name"
+    app:title="@string/app_name"
     />
