@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class FeesFragment extends Fragment {
     @BindView(R.id.txt_paid) TextView paidAmountText;
     @BindView(R.id.txt_remaining) TextView remainingAmountText;
     @BindView(R.id.recycle_fees_list) RecyclerView feesView;
+    @BindView(R.id.my_toolbar) Toolbar myToolbar;
 
     public void setFees(Fees fees) {
         this.fees = fees;
@@ -60,6 +62,7 @@ public class FeesFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getContext();
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -68,6 +71,7 @@ public class FeesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fees, container, false);
         ButterKnife.bind(this, view);
+        myToolbar.setTitle("Fees");
         populateUI();
         return view;
 

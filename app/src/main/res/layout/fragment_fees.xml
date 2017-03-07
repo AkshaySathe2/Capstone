@@ -9,6 +9,7 @@
         style="@style/Layout_wMPhMP"
         android:orientation="vertical">
 
+        <include layout="@layout/toolbar" android:id="@+id/my_toolbar" />
 
         <LinearLayout
             style="@style/Layout_wMPhWC"
