@@ -17,6 +17,7 @@ import com.udacity.akki.capstone.LoginActivity;
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.adapter.NotificationSlidePagerAdapter;
 import com.udacity.akki.capstone.fragment.FeesFragment;
+import com.udacity.akki.capstone.fragment.TestFragment;
 import com.udacity.akki.capstone.model.Installment;
 import com.udacity.akki.capstone.model.Notification;
 import com.udacity.akki.capstone.model.Test;
@@ -95,6 +96,18 @@ public class LandingActivity extends AppCompatActivity {
         if(user!=null && user.getDetail().getFees()!=null){
             FeesFragment fragmentS1 = new FeesFragment();
             fragmentS1.setFees(user.getDetail().getFees());
+            getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
+        }else{
+            Util.showToast(mContext,"No Fees Data Available");
+        }
+    }
+
+    @OnClick(R.id.card_test)
+    public void viewTest(View view) {
+        if(user!=null && user.getDetail().getFees()!=null){
+            TestFragment fragmentS1 = new TestFragment();
+            fragmentS1.setTest(user.getDetail().getTest());
+            fragmentS1.setLatestTest(user.getDetail().getLatestTestScores());
             getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
         }else{
             Util.showToast(mContext,"No Fees Data Available");

@@ -60,7 +60,7 @@ public class Detail {
                     latestTest = t;
 
             } else {
-                if (t.compareDate(latestTest.getDoa())) {
+                if (!t.compareDate(latestTest.getDoa())) {
                     latestTest=t;
                 }
             }

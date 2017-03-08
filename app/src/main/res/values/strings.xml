@@ -31,4 +31,8 @@
     <string name="remaining">REMAINING :</string>
     <string name="paid">PAID :</string>
     <string name="no_data_available">No data available</string>
+    <string name="topic">Topic :</string>
+    <string name="test_date">Test Date</string>
+    <string name="subject">Subject :</string>
+    <string name="score">Score</string>
 </resources>

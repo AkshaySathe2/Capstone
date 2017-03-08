@@ -1,0 +1,113 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:clickable="true"
+    tools:context="com.udacity.akki.capstone.fragment.TestFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/toolbar" android:id="@+id/my_toolbar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_test"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_margin="5dp">
+
+            <LinearLayout
+                style="@style/Layout_wMPhWC"
+                android:layout_margin="2dp"
+                android:background="@drawable/background_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    style="@style/TextView_wWChWC_H2"
+                    android:text="@string/topic" />
+
+                <TextView
+                    android:id="@+id/txt_topic"
+                    style="@style/TextView_wWChWC_H1"
+                    android:text="@string/na" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/Layout_wMPhWC"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextView_wWChWC_H2"
+                        android:gravity="center"
+                        android:text="@string/test_date" />
+
+                    <TextView
+                        android:id="@+id/txt_test_date"
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/na" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Layout_wWChWC"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/background_white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/subject" />
+
+                    <TextView
+                        android:id="@+id/txt_subject"
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="@string/na" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Layout_wWChWC"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/background_white"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="5dp">
+
+                    <TextView
+                        style="@style/TextView_wWChWC_H2"
+                        android:text="Score :" />
+
+                    <TextView
+                        android:id="@+id/txt_testScore"
+                        style="@style/TextView_wWChWC_H2"
+                        android:gravity="center"
+                        android:text="@string/na" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_test_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</FrameLayout>
