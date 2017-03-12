@@ -9,6 +9,15 @@ public class MyDate {
 
     private String date;
 
+    private boolean isEnabled = true;
+
+    public MyDate(int date, String value, boolean isEnabled) {
+        this.date=String.valueOf(date);
+        this.value=value;
+        this.isEnabled=isEnabled;
+    }
+
+
     public String getValue() {
         return value;
     }
@@ -25,11 +34,21 @@ public class MyDate {
         this.date = date;
     }
 
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
     @Override
     public String toString() {
         return "ClassPojo [value = " + value + ", date = " + date + "]";
     }
 
+    public MyDate() {
+    }
 }
 
 

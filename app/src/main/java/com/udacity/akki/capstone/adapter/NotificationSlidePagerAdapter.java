@@ -42,6 +42,9 @@ public class NotificationSlidePagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup collection, int position) {
         TextView view = new TextView(context);
+        view.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
         view.setText(notificationList[position].getMessage());
         view.setTextSize(22);
         view.setTextColor(Color.parseColor("#000000"));

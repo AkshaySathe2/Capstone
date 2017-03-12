@@ -16,8 +16,10 @@ import android.widget.TextView;
 import com.udacity.akki.capstone.LoginActivity;
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.adapter.NotificationSlidePagerAdapter;
+import com.udacity.akki.capstone.fragment.AttendanceFragment;
 import com.udacity.akki.capstone.fragment.FeesFragment;
 import com.udacity.akki.capstone.fragment.TestFragment;
+import com.udacity.akki.capstone.model.Attendance;
 import com.udacity.akki.capstone.model.Installment;
 import com.udacity.akki.capstone.model.Notification;
 import com.udacity.akki.capstone.model.Test;
@@ -86,10 +88,10 @@ public class LandingActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.btn_view_all_notifications)
+    /*@OnClick(R.id.btn_view_all_notifications)
     public void viewAllNotifications(View view) {
 
-    }
+    }*/
 
     @OnClick(R.id.card_fees)
     public void viewFees(View view) {
@@ -114,6 +116,16 @@ public class LandingActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.txt_attendance)
+    public void viewAttendance(View view) {
+        if(user!=null && user.getDetail().getFees()!=null){
+            AttendanceFragment fragmentS1 = new AttendanceFragment();
+            fragmentS1.setAttendance(user.getDetail().getAttendance());
+            getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
+        }else{
+            Util.showToast(mContext,"No Data Available");
+        }
+    }
 
     private void logoutUser(Context context) {
         startActivity(new Intent(context, LoginActivity.class));

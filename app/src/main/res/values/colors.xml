@@ -12,4 +12,6 @@
     <color name="dark_gray">#555555</color>
     <color name="color_test">#79c879</color>
     <color name="color_test_row_score_background">#c879c8</color>
+    <color name="color_attendance">#ae8c8e</color>
+    <color name="grey">#ededed</color>
 </resources>

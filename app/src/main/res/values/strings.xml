@@ -35,4 +35,15 @@
     <string name="test_date">Test Date</string>
     <string name="subject">Subject :</string>
     <string name="score">Score</string>
+    <string name="attendance">Attendance</string>
+    <string name="day_sun">SUN</string>
+    <string name="day_mon">MON</string>
+    <string name="day_tue">TUE</string>
+    <string name="day_wed">WED</string>
+    <string name="day_thu">THU</string>
+    <string name="day_fri">FRI</string>
+    <string name="day_sat">SAT</string>
+    <string name="button_calendar_next">button calendar next</string>
+    <string name="current_month">current month</string>
+    <string name="button_calendar_previous">button calendar previous</string>
 </resources>

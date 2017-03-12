@@ -20,6 +20,15 @@ public class Attendance {
         this.myYear = myYear;
     }
 
+    public MyYear fetchRequiredYear(int year){
+        for(MyYear y:myYear){
+            if(y.getValue().equalsIgnoreCase(String.valueOf(year))){
+                return y;
+            }
+        }
+        return  null;
+    }
+
     @Override
     public String toString()
     {

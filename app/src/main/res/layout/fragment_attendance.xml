@@ -1,0 +1,141 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:clickable="true"
+    tools:context="com.udacity.akki.capstone.fragment.AttendanceFragment">
+
+    <LinearLayout
+        style="@style/Layout_wMPhMP"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/my_toolbar"
+            layout="@layout/toolbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- date toolbar -->
+            <RelativeLayout
+                style="@style/Layout_wMPhWC"
+                android:padding="15dp">
+
+                <!-- prev button -->
+                <ImageView
+                    android:id="@+id/calendar_prev_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@color/color_attendance"
+                    android:contentDescription="@string/button_calendar_previous"
+                    android:src="@drawable/ic_navigate_before_white_24dp" />
+
+                <!-- date title -->
+                <TextView
+                    android:id="@+id/txt_month_display"
+                    style="@style/TextView_wWChWC_H2"
+                    android:layout_toEndOf="@+id/calendar_prev_button"
+                    android:layout_toLeftOf="@+id/calendar_next_button"
+                    android:layout_toRightOf="@+id/calendar_prev_button"
+                    android:layout_toStartOf="@+id/calendar_next_button"
+                    android:gravity="center"
+                    android:text="@string/current_month" />
+
+                <!-- next button -->
+                <ImageView
+                    android:id="@+id/calendar_next_button"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@color/color_attendance"
+                    android:contentDescription="@string/button_calendar_next"
+                    android:src="@drawable/ic_navigate_next_white_24dp" />
+            </RelativeLayout>
+
+            <!-- days header -->
+            <LinearLayout
+                android:id="@+id/calendar_header"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/day_sun"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/day_mon"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/day_tue"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/day_wed"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/day_thu"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/day_fri"
+                    android:textColor="#222222" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:text="@string/day_sat"
+                    android:textColor="#222222" />
+            </LinearLayout>
+
+            <!-- days view -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_attendance_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/txt_attendance_status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/no_data_available"/>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

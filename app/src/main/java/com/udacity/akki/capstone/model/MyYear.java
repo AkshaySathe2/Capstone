@@ -33,6 +33,15 @@ public class MyYear {
         this.myMonth = myMonth;
     }
 
+    public MyMonth fetchRequiredMonth(String month){
+        for(MyMonth m:myMonth){
+            if(m.getValue().equalsIgnoreCase(month)){
+                return m;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString()
     {
