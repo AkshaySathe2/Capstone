@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.udacity.akki.capstone.LoginActivity;
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.adapter.NotificationSlidePagerAdapter;
@@ -26,6 +27,7 @@ import com.udacity.akki.capstone.model.Test;
 import com.udacity.akki.capstone.model.User;
 import com.udacity.akki.capstone.network.ApiClient;
 import com.udacity.akki.capstone.network.ApiInterface;
+import com.udacity.akki.capstone.utility.AnalyticsUtil;
 import com.udacity.akki.capstone.utility.Util;
 
 import java.util.Timer;
@@ -52,11 +54,17 @@ public class LandingActivity extends AppCompatActivity {
     @BindView(R.id.txt_test_score) TextView testScore;
     private User user;
     private ProgressDialog dialog;
+
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
         ButterKnife.bind(this);
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         mContext = LandingActivity.this;
         dialog=new ProgressDialog(mContext);
         dialog.setMessage("Loading Data. Please Wait...");
@@ -95,6 +103,8 @@ public class LandingActivity extends AppCompatActivity {
 
     @OnClick(R.id.card_fees)
     public void viewFees(View view) {
+        Bundle bundle=AnalyticsUtil.cardClick(AnalyticsUtil.FEES_CARD_ID,AnalyticsUtil.FEES_CARD_NAME);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         if(user!=null && user.getDetail().getFees()!=null){
             FeesFragment fragmentS1 = new FeesFragment();
             fragmentS1.setFees(user.getDetail().getFees());
@@ -106,6 +116,8 @@ public class LandingActivity extends AppCompatActivity {
 
     @OnClick(R.id.card_test)
     public void viewTest(View view) {
+        Bundle bundle=AnalyticsUtil.cardClick(AnalyticsUtil.TEST_CARD_ID,AnalyticsUtil.TEST_CARD_NAME);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         if(user!=null && user.getDetail().getFees()!=null){
             TestFragment fragmentS1 = new TestFragment();
             fragmentS1.setTest(user.getDetail().getTest());
@@ -118,6 +130,8 @@ public class LandingActivity extends AppCompatActivity {
 
     @OnClick(R.id.txt_attendance)
     public void viewAttendance(View view) {
+        Bundle bundle=AnalyticsUtil.cardClick(AnalyticsUtil.ATTENDANCE_CARD_ID,AnalyticsUtil.ATTENDANCE_CARD_NAME);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
         if(user!=null && user.getDetail().getFees()!=null){
             AttendanceFragment fragmentS1 = new AttendanceFragment();
             fragmentS1.setAttendance(user.getDetail().getAttendance());

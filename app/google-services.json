@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
+          "client_id": "891610627699-sd6fkh8ls2hdr1i9ip1k9vhv20bmfnsr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.udacity.akki.capstone",
+            "certificate_hash": "b64806b9ae8679c0300670932e56335f78b99917"
+          }
+        },
+        {
           "client_id": "891610627699-qmr6gf7l7n4p9l65lk5ceok8d3b90oic.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.udacity.akki.capstone",
-            "certificate_hash": "CBCBDF4A226D9DE8C6F14FF689FCB78002DCB219"
+            "certificate_hash": "cbcbdf4a226d9de8c6f14ff689fcb78002dcb219"
           }
         },
         {
