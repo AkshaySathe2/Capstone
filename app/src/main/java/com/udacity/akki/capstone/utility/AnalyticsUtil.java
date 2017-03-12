@@ -14,7 +14,7 @@ public class AnalyticsUtil {
     public static final String FEES_CARD_NAME="Fees_Card";
     public static final String TEST_CARD_ID = "card_2";
     public static final String TEST_CARD_NAME = "Test_Card";
-    public static final String ATTENDANCE_CARD_ID = "3";
+    public static final String ATTENDANCE_CARD_ID = "card_3";
     public static final String ATTENDANCE_CARD_NAME = "Attendance_Card";
 
 

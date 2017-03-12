@@ -46,4 +46,9 @@
     <string name="button_calendar_next">button calendar next</string>
     <string name="current_month">current month</string>
     <string name="button_calendar_previous">button calendar previous</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="appwidget_notifications">Notifications</string>
+    <string name="test">Test</string>
 </resources>
