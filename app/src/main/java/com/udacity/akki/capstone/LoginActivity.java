@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.edt_password)
     EditText edtPassword;
 
+    private Boolean isLoggedIn = false;
     //Adding Firebase Implementations
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -65,14 +66,17 @@ public class LoginActivity extends AppCompatActivity {
                                         // Send token to your backend via HTTPS
                                         // ...
                                         Util.setToken(mContext, idToken);
-                                        Util.showToast(mContext, "Logged in successfully.");
 
-                                        //Added analytics for login
-                                        Bundle bundle = AnalyticsUtil.login(AnalyticsUtil.LOGIN_ID, AnalyticsUtil.LOGIN_NAME);
-                                        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-                                        Intent intent = new Intent(mContext, LandingActivity.class);
-                                        startActivity(intent);
-                                        finish();
+                                        if(!isLoggedIn) {
+                                            Util.showToast(mContext, "Logged in successfully.");
+                                            //Added analytics for login
+                                            Bundle bundle = AnalyticsUtil.login(AnalyticsUtil.LOGIN_ID, AnalyticsUtil.LOGIN_NAME);
+                                            mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                                            Intent intent = new Intent(mContext, LandingActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                            isLoggedIn=true;
+                                        }
                                     } else {
                                         // Handle error -> task.getException();
                                     }
@@ -81,10 +85,6 @@ public class LoginActivity extends AppCompatActivity {
 
                     //
 
-                } else {
-                    // User is signed out
-                    Log.d(LOG_TAG, "onAuthStateChanged:signed_out");
-                    Util.showToast(mContext, "User signed out.");
                 }
                 // ...
             }
@@ -132,13 +132,13 @@ public class LoginActivity extends AppCompatActivity {
                 });
 
 
-        if (Util.isStringNullOrEmpty(userName) || Util.isStringNullOrEmpty(password)) {
+        /*if (Util.isStringNullOrEmpty(userName) || Util.isStringNullOrEmpty(password)) {
             Util.showToast(mContext, "UserName/ Password cannot be empty !");
         } else if (userName.equals("Akki") && password.equals("Akki")) {
             Intent intent = new Intent(mContext, LandingActivity.class);
             startActivity(intent);
             finish();
-        }
+        }*/
 
 
     }

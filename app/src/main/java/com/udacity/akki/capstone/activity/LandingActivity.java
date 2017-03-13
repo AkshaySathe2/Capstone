@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
 import com.udacity.akki.capstone.LoginActivity;
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.adapter.NotificationSlidePagerAdapter;
@@ -49,12 +50,18 @@ public class LandingActivity extends AppCompatActivity {
     private static final String LOG_TAG = LandingActivity.class.getSimpleName();
     private int currentPage = 0;// For auto swiping notifications
     //@BindView(R.id.btn_login) EditText edtPassword;
-    @BindView(R.id.vp_notifications) ViewPager mPager;
-    @BindView(R.id.txt_fees_value) TextView feesValue;
-    @BindView(R.id.txt_fees_date) TextView feesDate;
-    @BindView(R.id.txt_test_date) TextView testDate;
-    @BindView(R.id.txt_test_name) TextView testName;
-    @BindView(R.id.txt_test_score) TextView testScore;
+    @BindView(R.id.vp_notifications)
+    ViewPager mPager;
+    @BindView(R.id.txt_fees_value)
+    TextView feesValue;
+    @BindView(R.id.txt_fees_date)
+    TextView feesDate;
+    @BindView(R.id.txt_test_date)
+    TextView testDate;
+    @BindView(R.id.txt_test_name)
+    TextView testName;
+    @BindView(R.id.txt_test_score)
+    TextView testScore;
     @BindView(R.id.my_toolbar)
     Toolbar myToolbar;
     private User user;
@@ -72,7 +79,7 @@ public class LandingActivity extends AppCompatActivity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         mContext = LandingActivity.this;
-        dialog=new ProgressDialog(mContext);
+        dialog = new ProgressDialog(mContext);
         dialog.setMessage("Loading Data. Please Wait...");
         dialog.show();
         // Write a message to the database
@@ -109,51 +116,56 @@ public class LandingActivity extends AppCompatActivity {
 
     @OnClick(R.id.card_fees)
     public void viewFees(View view) {
-        Bundle bundle=AnalyticsUtil.cardClick(AnalyticsUtil.FEES_CARD_ID,AnalyticsUtil.FEES_CARD_NAME);
+        Bundle bundle = AnalyticsUtil.cardClick(AnalyticsUtil.FEES_CARD_ID, AnalyticsUtil.FEES_CARD_NAME);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-        if(user!=null && user.getDetail().getFees()!=null){
+        if (user != null && user.getDetail().getFees() != null) {
             FeesFragment fragmentS1 = new FeesFragment();
             fragmentS1.setFees(user.getDetail().getFees());
             getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
-        }else{
-            Util.showToast(mContext,"No Fees Data Available");
+        } else {
+            Util.showToast(mContext, "No Fees Data Available");
         }
     }
 
     @OnClick(R.id.card_test)
     public void viewTest(View view) {
-        Bundle bundle=AnalyticsUtil.cardClick(AnalyticsUtil.TEST_CARD_ID,AnalyticsUtil.TEST_CARD_NAME);
+        Bundle bundle = AnalyticsUtil.cardClick(AnalyticsUtil.TEST_CARD_ID, AnalyticsUtil.TEST_CARD_NAME);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-        if(user!=null && user.getDetail().getFees()!=null){
+        if (user != null && user.getDetail().getFees() != null) {
             TestFragment fragmentS1 = new TestFragment();
             fragmentS1.setTest(user.getDetail().getTest());
             fragmentS1.setLatestTest(user.getDetail().getLatestTestScores());
             getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
-        }else{
-            Util.showToast(mContext,"No Fees Data Available");
+        } else {
+            Util.showToast(mContext, "No Fees Data Available");
         }
     }
 
     @OnClick(R.id.txt_attendance)
     public void viewAttendance(View view) {
-        Bundle bundle=AnalyticsUtil.cardClick(AnalyticsUtil.ATTENDANCE_CARD_ID,AnalyticsUtil.ATTENDANCE_CARD_NAME);
+        Bundle bundle = AnalyticsUtil.cardClick(AnalyticsUtil.ATTENDANCE_CARD_ID, AnalyticsUtil.ATTENDANCE_CARD_NAME);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-        if(user!=null && user.getDetail().getFees()!=null){
+        if (user != null && user.getDetail().getFees() != null) {
             AttendanceFragment fragmentS1 = new AttendanceFragment();
             fragmentS1.setAttendance(user.getDetail().getAttendance());
             getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
-        }else{
-            Util.showToast(mContext,"No Data Available");
+        } else {
+            Util.showToast(mContext, "No Data Available");
         }
     }
 
     private void logoutUser(Context context) {
+
+        // User is signed out
+        Log.d(LOG_TAG, "onAuthStateChanged:signed_out");
+        Util.showToast(mContext, "User signed out.");
         startActivity(new Intent(context, LoginActivity.class));
+        FirebaseAuth.getInstance().signOut();
         finish();
     }
 
-    private void dismissDialog(){
-        if(dialog!=null && dialog.isShowing()){
+    private void dismissDialog() {
+        if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
     }
@@ -173,8 +185,8 @@ public class LandingActivity extends AppCompatActivity {
         autoSwipeNotifications();
 
         //Populating Test
-        Test test=user.getDetail().getLatestTestScores();
-        if(test!=null){
+        Test test = user.getDetail().getLatestTestScores();
+        if (test != null) {
             populateTest(test);
         }
 
@@ -187,7 +199,7 @@ public class LandingActivity extends AppCompatActivity {
     private void populateTest(Test test) {
         testName.setText(test.getTopic());
         testDate.setText(test.getDoa());
-        testScore.setText(test.getMarksObtained()+" / "+test.getMaxMarks());
+        testScore.setText(test.getMarksObtained() + " / " + test.getMaxMarks());
     }
 
     private void populateFees(Installment installment) {
@@ -205,7 +217,7 @@ public class LandingActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 break;

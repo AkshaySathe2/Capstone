@@ -52,4 +52,5 @@
     <string name="appwidget_notifications">Notifications</string>
     <string name="test">Test</string>
     <string name="action_logout">Logout</string>
+    <string name="e_school_management">E-School Management</string>
 </resources>
