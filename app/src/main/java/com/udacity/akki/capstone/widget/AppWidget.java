@@ -7,6 +7,11 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.activity.LandingActivity;
 import com.udacity.akki.capstone.model.Notification;
@@ -14,6 +19,7 @@ import com.udacity.akki.capstone.model.Test;
 import com.udacity.akki.capstone.model.User;
 import com.udacity.akki.capstone.network.ApiClient;
 import com.udacity.akki.capstone.network.ApiInterface;
+import com.udacity.akki.capstone.utility.FirebaseDatabaseUtil;
 import com.udacity.akki.capstone.utility.Util;
 
 import java.util.List;
@@ -45,7 +51,29 @@ public class AppWidget extends AppWidgetProvider {
         RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_provider_layout);
         rv.setRemoteAdapter(appWidgetId, R.id.list1, intent);*/
 
-        ApiInterface apiService =
+        // Write a message to the database
+        FirebaseDatabase database = FirebaseDatabaseUtil.getDatabase();
+        DatabaseReference myRef = database.getReference("Users").child(Util.getUid(context));
+        myRef.keepSynced(true);
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                User user = dataSnapshot.getValue(User.class);
+                updateUI(user,views,appWidgetManager,appWidgetId);
+                //Log.d(LOG_TAG, "Value is: " + user);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(LOG_TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        /*ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
         Call<User> call = apiService.getUserData(Util.getUid(context), Util.getToken(context));
@@ -62,7 +90,7 @@ public class AppWidget extends AppWidgetProvider {
                 // Log error here since request failed
                 Log.e(LOG_TAG, t.toString());
             }
-        });
+        });*/
 
     }
 
