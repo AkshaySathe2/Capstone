@@ -3,6 +3,7 @@ package com.udacity.akki.capstone.utility;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -75,6 +76,11 @@ public class Util {
     public static void showToast(Context context, String message) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
+
+    public static void showToast(Context context, int messageId) {
+        Toast.makeText(context, context.getString(messageId), Toast.LENGTH_SHORT).show();
+    }
+
 
     public static String formatDate(Date originalDate, String format) {
         SimpleDateFormat sdf2 = null;

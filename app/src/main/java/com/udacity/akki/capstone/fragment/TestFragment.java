@@ -74,7 +74,7 @@ public class TestFragment extends Fragment {
 
     private void populateUI() {
         if (test == null || test.size() == 0) {
-            Util.showToast(mContext, getString(R.string.no_data_available));
+            Util.showToast(mContext, R.string.no_data_available);
         } else {
             populateHeading();
             populateList();

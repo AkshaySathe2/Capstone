@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mContext = LoginActivity.this;
         dialog=new ProgressDialog(mContext);
-        dialog.setMessage("Logging in... Please wait...");
+        dialog.setMessage(getString(R.string.login_progess_dialog));
         //Added for Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Util.setToken(mContext, idToken);
 
                                         if(!isLoggedIn) {
-                                            Util.showToast(mContext, "Logged in successfully.");
+                                            Util.showToast(mContext, R.string.logged_in);
                                             //Added analytics for login
                                             Bundle bundle = AnalyticsUtil.login(AnalyticsUtil.LOGIN_ID, AnalyticsUtil.LOGIN_NAME);
                                             mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(LOG_TAG, "signInWithEmail", task.getException());
-                            Util.showToast(mContext, "Authentication failed.");
+                            Util.showToast(mContext, R.string.authentication_failed);
                         }
 
                         // ...

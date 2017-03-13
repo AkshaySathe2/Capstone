@@ -38,7 +38,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                 // Send token to your backend via HTTPS
                                 // ...
                                 Util.setToken(mContext,idToken);
-                                Util.showToast(mContext,"Logged in successfully.");
+                                Util.showToast(mContext,R.string.logged_in);
                                 Intent intent=new Intent(mContext,LandingActivity.class);
                                 startActivity(intent);
                                 finish();

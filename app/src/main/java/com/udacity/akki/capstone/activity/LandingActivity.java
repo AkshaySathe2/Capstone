@@ -81,7 +81,7 @@ public class LandingActivity extends AppCompatActivity {
 
         mContext = LandingActivity.this;
         dialog = new ProgressDialog(mContext);
-        dialog.setMessage("Loading Data. Please Wait...");
+        dialog.setMessage(getString(R.string.loading_progress_dialog));
         dialog.show();
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabaseUtil.getDatabase();
@@ -140,7 +140,7 @@ public class LandingActivity extends AppCompatActivity {
             fragmentS1.setFees(user.getDetail().getFees());
             getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
         } else {
-            Util.showToast(mContext, "No Fees Data Available");
+            Util.showToast(mContext, R.string.no_fees_data_available);
         }
     }
 
@@ -154,7 +154,7 @@ public class LandingActivity extends AppCompatActivity {
             fragmentS1.setLatestTest(user.getDetail().getLatestTestScores());
             getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
         } else {
-            Util.showToast(mContext, "No Fees Data Available");
+            Util.showToast(mContext, R.string.no_fees_data_available);
         }
     }
 
@@ -167,7 +167,7 @@ public class LandingActivity extends AppCompatActivity {
             fragmentS1.setAttendance(user.getDetail().getAttendance());
             getSupportFragmentManager().beginTransaction().add(R.id.layout_fragment, fragmentS1).addToBackStack("Main").commit();
         } else {
-            Util.showToast(mContext, "No Data Available");
+            Util.showToast(mContext, R.string.no_data_available);
         }
     }
 
@@ -175,7 +175,7 @@ public class LandingActivity extends AppCompatActivity {
 
         // User is signed out
         Log.d(LOG_TAG, "onAuthStateChanged:signed_out");
-        Util.showToast(mContext, "User signed out.");
+        Util.showToast(mContext, R.string.user_signed_out);
         startActivity(new Intent(context, LoginActivity.class));
         FirebaseAuth.getInstance().signOut();
         finish();

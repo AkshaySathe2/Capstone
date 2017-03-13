@@ -40,4 +40,13 @@
     <string name="action_logout">Logout</string>
     <string name="e_school_management">E-School Management</string>
     <string name="total">TOTAL :</string>
+
+    <!--Toast strings-->
+    <string name="no_fees_data_available">No Fees Data Available</string>
+    <string name="user_signed_out">User signed out.</string>
+    <string name="logged_in">Logged in successfully.</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="login_progess_dialog">Logging in... Please wait...</string>
+    <string name="loading_progress_dialog">Loading Data. Please Wait...</string>
+
 </resources>
