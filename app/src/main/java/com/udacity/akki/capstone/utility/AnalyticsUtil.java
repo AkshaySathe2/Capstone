@@ -17,12 +17,22 @@ public class AnalyticsUtil {
     public static final String ATTENDANCE_CARD_ID = "card_3";
     public static final String ATTENDANCE_CARD_NAME = "Attendance_Card";
 
+    public static final String LOGIN_ID = "login";
+    public static final String LOGIN_NAME = "Login";
 
     public static Bundle cardClick(String id,String name){
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "card");
+        return bundle;
+    }
+
+    public static Bundle login(String id,String name){
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "login");
         return bundle;
     }
 
