@@ -1,5 +1,6 @@
 package com.udacity.akki.capstone;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAnalytics mFirebaseAnalytics;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mContext = LoginActivity.this;
+        dialog=new ProgressDialog(mContext);
+        dialog.setMessage("Logging in... Please wait...");
         //Added for Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -87,6 +91,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
                 // ...
+                if(dialog != null && dialog.isShowing()){
+                    dialog.dismiss();
+                }
             }
         };
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -110,7 +117,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_login)
     public void submit(View view) {
-
+        if(dialog != null && !dialog.isShowing()){
+            dialog.show();
+        }
         String userName = edtUserName.getText().toString();
         String password = edtPassword.getText().toString();
         mAuth.signInWithEmailAndPassword(userName, password)
