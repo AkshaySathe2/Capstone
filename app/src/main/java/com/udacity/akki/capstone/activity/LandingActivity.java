@@ -9,7 +9,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -53,6 +55,8 @@ public class LandingActivity extends AppCompatActivity {
     @BindView(R.id.txt_test_date) TextView testDate;
     @BindView(R.id.txt_test_name) TextView testName;
     @BindView(R.id.txt_test_score) TextView testScore;
+    @BindView(R.id.my_toolbar)
+    Toolbar myToolbar;
     private User user;
     private ProgressDialog dialog;
 
@@ -63,6 +67,7 @@ public class LandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
         ButterKnife.bind(this);
+        setSupportActionBar(myToolbar);
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
@@ -191,12 +196,26 @@ public class LandingActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();// close this activity and return to preview activity (if there is any)
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+            case R.id.action_logout:
+                finish();
+                logoutUser(mContext);
+                break;
+            default:
+                super.onOptionsItemSelected(item);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
