@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mContext = LoginActivity.this;
-        dialog=new ProgressDialog(mContext);
+        dialog = new ProgressDialog(mContext);
         dialog.setMessage(getString(R.string.login_progess_dialog));
         //Added for Firebase Authentication
         mAuth = FirebaseAuth.getInstance();
@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                                         // ...
                                         Util.setToken(mContext, idToken);
 
-                                        if(!isLoggedIn) {
+                                        if (!isLoggedIn) {
                                             Util.showToast(mContext, R.string.logged_in);
                                             //Added analytics for login
                                             Bundle bundle = AnalyticsUtil.login(AnalyticsUtil.LOGIN_ID, AnalyticsUtil.LOGIN_NAME);
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                             Intent intent = new Intent(mContext, LandingActivity.class);
                                             startActivity(intent);
                                             finish();
-                                            isLoggedIn=true;
+                                            isLoggedIn = true;
                                         }
                                     } else {
                                         // Handle error -> task.getException();
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
                 // ...
-                if(dialog != null && dialog.isShowing()){
+                if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
                 }
             }
@@ -116,29 +116,36 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_login)
     public void submit(View view) {
-        if(dialog != null && !dialog.isShowing()){
-            dialog.show();
-        }
+
         String userName = edtUserName.getText().toString();
         String password = edtPassword.getText().toString();
-        mAuth.signInWithEmailAndPassword(userName, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(LOG_TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+        if (Util.isStringNullOrEmpty(userName) || Util.isStringNullOrEmpty(password)) {
+            Util.showToast(mContext, R.string.username_password_not_empty);
+        } else {
+            if (dialog != null && !dialog.isShowing()) {
+                dialog.show();
+            }
+            mAuth.signInWithEmailAndPassword(userName, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            Log.d(LOG_TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(LOG_TAG, "signInWithEmail", task.getException());
-                            Util.showToast(mContext, R.string.authentication_failed);
+                            // If sign in fails, display a message to the user. If sign in succeeds
+                            // the auth state listener will be notified and logic to handle the
+                            // signed in user can be handled in the listener.
+                            if (!task.isSuccessful()) {
+                                Log.w(LOG_TAG, "signInWithEmail", task.getException());
+                                Util.showToast(mContext, R.string.authentication_failed);
+                                if (dialog != null && dialog.isShowing()) {
+                                    dialog.dismiss();
+                                }
+                            }
+
+                            // ...
                         }
-
-                        // ...
-                    }
-                });
-
+                    });
+        }
 
         /*if (Util.isStringNullOrEmpty(userName) || Util.isStringNullOrEmpty(password)) {
             Util.showToast(mContext, "UserName/ Password cannot be empty !");

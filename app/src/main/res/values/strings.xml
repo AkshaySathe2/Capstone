@@ -49,5 +49,6 @@
     <string name="login_progess_dialog">Logging in… Please wait…</string>
     <string name="loading_progress_dialog">Loading Data. Please Wait…</string>
     <string name="fees">Fees</string>
+    <string name="username_password_not_empty">UserName/ Password cannot be empty !</string>
 
 </resources>

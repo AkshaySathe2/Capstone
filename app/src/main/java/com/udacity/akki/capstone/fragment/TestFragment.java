@@ -3,6 +3,7 @@ package com.udacity.akki.capstone.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,8 @@ import com.udacity.akki.capstone.custom.DividerItemDecoration;
 import com.udacity.akki.capstone.model.Test;
 import com.udacity.akki.capstone.utility.Util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,16 +34,23 @@ import butterknife.ButterKnife;
  */
 public class TestFragment extends Fragment {
 
-
-    private List<Test> test;
+    private static final String PARCELABLE_KEY = "Test";
+    private static final String PARCELABLE_KEY_2 = "LatestTest";
+    private List<Test> test = new ArrayList<>();
     private Context mContext;
     private TestAdapter mAdapter;
-    @BindView(R.id.my_toolbar) Toolbar myToolbar;
-    @BindView(R.id.txt_testScore) TextView score;
-    @BindView(R.id.txt_topic) TextView topic;
-    @BindView(R.id.txt_subject) TextView subject;
-    @BindView(R.id.txt_test_date) TextView testDate;
-    @BindView(R.id.recycle_test_list) RecyclerView testView;
+    @BindView(R.id.my_toolbar)
+    Toolbar myToolbar;
+    @BindView(R.id.txt_testScore)
+    TextView score;
+    @BindView(R.id.txt_topic)
+    TextView topic;
+    @BindView(R.id.txt_subject)
+    TextView subject;
+    @BindView(R.id.txt_test_date)
+    TextView testDate;
+    @BindView(R.id.recycle_test_list)
+    RecyclerView testView;
     private Test latestTest;
 
     public TestFragment() {
@@ -51,6 +61,10 @@ public class TestFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getContext();
+        if (savedInstanceState != null) {
+            test = savedInstanceState.getParcelableArrayList(PARCELABLE_KEY);
+            latestTest = savedInstanceState.getParcelable(PARCELABLE_KEY_2);
+        }
     }
 
     @Override
@@ -70,6 +84,13 @@ public class TestFragment extends Fragment {
         }
         populateUI();
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(PARCELABLE_KEY, (ArrayList<? extends Parcelable>) test);
+        outState.putParcelable(PARCELABLE_KEY_2, latestTest);
     }
 
     private void populateUI() {
@@ -92,14 +113,17 @@ public class TestFragment extends Fragment {
 
     private void populateHeading() {
         //DateFormat sdfForDisplay = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
-        score.setText(latestTest.getMarksObtained()+" / "+latestTest.getMaxMarks());
-        subject.setText(latestTest.getSubject());
-        topic.setText(latestTest.getTopic());
-        testDate.setText(latestTest.getDoa());
+        if (latestTest != null) {
+            score.setText(latestTest.getMarksObtained() + " / " + latestTest.getMaxMarks());
+            subject.setText(latestTest.getSubject());
+            topic.setText(latestTest.getTopic());
+            testDate.setText(latestTest.getDoa());
+        }
     }
 
     public void setTest(List<Test> test) {
-        this.test = test;
+        this.test.clear();
+        this.test.addAll(test);
     }
 
     public void setLatestTest(Test latestTest) {

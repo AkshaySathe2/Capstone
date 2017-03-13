@@ -34,7 +34,9 @@ import butterknife.OnClick;
  */
 public class AttendanceFragment extends Fragment {
 
-
+    private static final String PARCELABLE_KEY_1 = "Attendance";
+    private static final String PARCELABLE_KEY_2 = "displayedYear";
+    private static final String PARCELABLE_KEY_3 = "displayedMonth";
     private Attendance attendance;
     private AttendanceAdapter mAdapter;
     @BindView(R.id.my_toolbar) Toolbar myToolbar;
@@ -56,6 +58,9 @@ public class AttendanceFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getContext();
+        if(savedInstanceState!=null){
+            attendance = savedInstanceState.getParcelable(PARCELABLE_KEY_1);
+        }
     }
 
     @Override
@@ -73,8 +78,24 @@ public class AttendanceFragment extends Fragment {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        populateUI();
+        if(savedInstanceState!=null){
+            displayedYear = savedInstanceState.getInt(PARCELABLE_KEY_2);
+            displayedMonth = savedInstanceState.getInt(PARCELABLE_KEY_3);
+            currentDisplayMonth.setText(listOfMonths[displayedMonth]);
+            List<MyDate> dates=getAttendanceStatus(displayedYear,displayedMonth);
+            populateDates(dates);
+        }else {
+            populateUI();
+        }
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(PARCELABLE_KEY_1,attendance);
+        outState.putInt(PARCELABLE_KEY_2,displayedYear);
+        outState.putInt(PARCELABLE_KEY_3,displayedMonth);
     }
 
     @OnClick(R.id.calendar_next_button)
@@ -109,7 +130,7 @@ public class AttendanceFragment extends Fragment {
         displayedMonth=month;
         displayedYear=year;
         currentDisplayMonth.setText(listOfMonths[displayedMonth]);
-        List<MyDate> dates=getAttendanceStatus(year,month);
+        List<MyDate> dates=getAttendanceStatus(displayedYear,displayedMonth);
         populateDates(dates);
     }
 

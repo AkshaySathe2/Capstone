@@ -38,6 +38,7 @@ import butterknife.ButterKnife;
  */
 public class FeesFragment extends Fragment {
 
+    private static final String PARCELABLE_KEY="Fees";
     private Fees fees;
     private Context mContext;
     private ProgressDialog progressDialog;
@@ -71,7 +72,9 @@ public class FeesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mContext = getContext();
         setHasOptionsMenu(true);
-
+        if(savedInstanceState!=null){
+            fees= savedInstanceState.getParcelable(PARCELABLE_KEY);
+        }
     }
 
     @Override
@@ -92,6 +95,12 @@ public class FeesFragment extends Fragment {
         populateUI();
         return view;
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(PARCELABLE_KEY,fees);
     }
 
     /*@Override

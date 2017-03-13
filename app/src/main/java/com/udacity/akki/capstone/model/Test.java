@@ -1,5 +1,8 @@
 package com.udacity.akki.capstone.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.text.ParseException;
@@ -11,7 +14,7 @@ import java.util.Locale;
  * Created by 836158 on 20-02-2017.
  */
 
-public class Test {
+public class Test implements Parcelable {
     private String topic;
 
     private String id;
@@ -90,6 +93,8 @@ public class Test {
         return "ClassPojo [topic = " + topic + ", id = " + id + ", marksObtained = " + marksObtained + ", passingMarks = " + passingMarks + ", subject = " + subject + ", doa = " + doa + ", maxMarks = " + maxMarks + "]";
     }
 
+
+
     public Boolean compareDate(String date){
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
         try {
@@ -103,4 +108,44 @@ public class Test {
 
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.topic);
+        dest.writeString(this.id);
+        dest.writeString(this.marksObtained);
+        dest.writeString(this.passingMarks);
+        dest.writeString(this.subject);
+        dest.writeString(this.doa);
+        dest.writeString(this.maxMarks);
+    }
+
+    public Test() {
+    }
+
+    protected Test(Parcel in) {
+        this.topic = in.readString();
+        this.id = in.readString();
+        this.marksObtained = in.readString();
+        this.passingMarks = in.readString();
+        this.subject = in.readString();
+        this.doa = in.readString();
+        this.maxMarks = in.readString();
+    }
+
+    public static final Parcelable.Creator<Test> CREATOR = new Parcelable.Creator<Test>() {
+        @Override
+        public Test createFromParcel(Parcel source) {
+            return new Test(source);
+        }
+
+        @Override
+        public Test[] newArray(int size) {
+            return new Test[size];
+        }
+    };
 }
