@@ -8,9 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.udacity.akki.capstone.R;
-import com.udacity.akki.capstone.model.Installment;
 import com.udacity.akki.capstone.model.Test;
-import com.udacity.akki.capstone.utility.Util;
 
 import java.util.ArrayList;
 import java.util.List;

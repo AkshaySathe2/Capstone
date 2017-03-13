@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.GetTokenResult;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;

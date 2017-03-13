@@ -17,8 +17,6 @@ import android.widget.TextView;
 
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.adapter.AttendanceAdapter;
-import com.udacity.akki.capstone.adapter.InstallmentAdapter;
-import com.udacity.akki.capstone.custom.DividerItemDecoration;
 import com.udacity.akki.capstone.model.Attendance;
 import com.udacity.akki.capstone.model.MyDate;
 import com.udacity.akki.capstone.model.MyMonth;

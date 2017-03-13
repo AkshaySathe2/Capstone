@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/white"
     android:clickable="true"
     tools:context="com.udacity.akki.capstone.fragment.AttendanceFragment">
 
@@ -61,7 +61,6 @@
 
             <!-- days header -->
             <LinearLayout
-                android:id="@+id/calendar_header"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -29,13 +28,10 @@ import com.udacity.akki.capstone.adapter.NotificationSlidePagerAdapter;
 import com.udacity.akki.capstone.fragment.AttendanceFragment;
 import com.udacity.akki.capstone.fragment.FeesFragment;
 import com.udacity.akki.capstone.fragment.TestFragment;
-import com.udacity.akki.capstone.model.Attendance;
 import com.udacity.akki.capstone.model.Installment;
 import com.udacity.akki.capstone.model.Notification;
 import com.udacity.akki.capstone.model.Test;
 import com.udacity.akki.capstone.model.User;
-import com.udacity.akki.capstone.network.ApiClient;
-import com.udacity.akki.capstone.network.ApiInterface;
 import com.udacity.akki.capstone.utility.AnalyticsUtil;
 import com.udacity.akki.capstone.utility.FirebaseDatabaseUtil;
 import com.udacity.akki.capstone.utility.Util;
@@ -48,9 +44,6 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LandingActivity extends AppCompatActivity {
 

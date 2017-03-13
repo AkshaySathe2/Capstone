@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_landing"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -35,7 +34,6 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/ll_fees_value"
                         style="@style/Layout_wWChWC"
                         android:orientation="horizontal">
 
@@ -51,7 +49,6 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/static_due_on"
                         style="@style/TextView_wWChWC_H2"
                         android:text="@string/due_on" />
 

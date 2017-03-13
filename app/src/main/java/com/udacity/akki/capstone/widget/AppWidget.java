@@ -3,7 +3,6 @@ package com.udacity.akki.capstone.widget;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -13,20 +12,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.udacity.akki.capstone.R;
-import com.udacity.akki.capstone.activity.LandingActivity;
 import com.udacity.akki.capstone.model.Notification;
 import com.udacity.akki.capstone.model.Test;
 import com.udacity.akki.capstone.model.User;
-import com.udacity.akki.capstone.network.ApiClient;
-import com.udacity.akki.capstone.network.ApiInterface;
 import com.udacity.akki.capstone.utility.FirebaseDatabaseUtil;
 import com.udacity.akki.capstone.utility.Util;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Implementation of App Widget functionality.

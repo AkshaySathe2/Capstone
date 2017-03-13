@@ -11,11 +11,8 @@ import android.widget.TextView;
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.model.MyDate;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -97,13 +94,13 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.My
     public void onBindViewHolder(MyViewHolder holder, int position) {
         MyDate date = myDates.get(position);
         holder.attendanceDate.setText(date.getDate());
-        holder.attendaceStatus.setText(date.getValue());
+        holder.attendanceStatus.setText(date.getValue());
         if (date.getValue().equalsIgnoreCase("A")) {
-            holder.attendaceStatus.setBackgroundColor(Color.parseColor("#FF0000"));
+            holder.attendanceStatus.setBackgroundColor(Color.parseColor("#FF0000"));
         } else if (date.getValue().equalsIgnoreCase("P")) {
-            holder.attendaceStatus.setBackgroundColor(Color.parseColor("#008000"));
+            holder.attendanceStatus.setBackgroundColor(Color.parseColor("#008000"));
         } else {
-            holder.attendaceStatus.setBackgroundColor(Color.parseColor("#222222"));
+            holder.attendanceStatus.setBackgroundColor(Color.parseColor("#222222"));
         }
     }
 
@@ -117,7 +114,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.My
         @BindView(R.id.txt_date)
         TextView attendanceDate;
         @BindView(R.id.txt_status)
-        TextView attendaceStatus;
+        TextView attendanceStatus;
 
         public MyViewHolder(View itemView) {
             super(itemView);

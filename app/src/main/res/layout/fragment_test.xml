@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/white"
     android:clickable="true"
     tools:context="com.udacity.akki.capstone.fragment.TestFragment">
 
@@ -40,7 +40,8 @@
 
             <LinearLayout
                 style="@style/Layout_wMPhWC"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -91,7 +92,7 @@
 
                     <TextView
                         style="@style/TextView_wWChWC_H2"
-                        android:text="Score :" />
+                        android:text="@string/score" />
 
                     <TextView
                         android:id="@+id/txt_testScore"

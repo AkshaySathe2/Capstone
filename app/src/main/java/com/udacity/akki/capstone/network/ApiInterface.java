@@ -1,6 +1,5 @@
 package com.udacity.akki.capstone.network;
 
-import com.udacity.akki.capstone.HomePageParameters;
 import com.udacity.akki.capstone.model.User;
 
 import retrofit2.Call;

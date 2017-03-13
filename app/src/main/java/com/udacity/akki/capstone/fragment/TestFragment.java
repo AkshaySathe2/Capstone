@@ -16,16 +16,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.udacity.akki.capstone.R;
-import com.udacity.akki.capstone.adapter.InstallmentAdapter;
 import com.udacity.akki.capstone.adapter.TestAdapter;
 import com.udacity.akki.capstone.custom.DividerItemDecoration;
 import com.udacity.akki.capstone.model.Test;
 import com.udacity.akki.capstone.utility.Util;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
