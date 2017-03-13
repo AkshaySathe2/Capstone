@@ -103,7 +103,7 @@
     </style>
     <style name="Card_Test" parent="MyCard">
         <!-- Customize your theme here. -->
-        <item name="cardBackgroundColor">@color/color_fees</item>
+        <item name="cardBackgroundColor">@color/color_test</item>
 
     </style>
 

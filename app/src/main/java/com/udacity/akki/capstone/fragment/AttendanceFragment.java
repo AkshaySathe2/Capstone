@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -63,7 +65,15 @@ public class AttendanceFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_attendance, container, false);
         ButterKnife.bind(this, view);
-        myToolbar.setTitle("Fees");
+        myToolbar.setTitle("Attendance");
+        ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
+        try {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(ContextCompat.getDrawable(getActivity(), R.drawable.ic_arrow_back_black_24dp));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         populateUI();
         return view;
     }

@@ -5,11 +5,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -41,13 +44,20 @@ public class FeesFragment extends Fragment {
     private Context mContext;
     private ProgressDialog progressDialog;
     private InstallmentAdapter mAdapter;
-    @BindView(R.id.txt_fees_date) TextView feesDate;
-    @BindView(R.id.txt_fees_value) TextView feesAmount;
-    @BindView(R.id.txt_total) TextView totalAmountText;
-    @BindView(R.id.txt_paid) TextView paidAmountText;
-    @BindView(R.id.txt_remaining) TextView remainingAmountText;
-    @BindView(R.id.recycle_fees_list) RecyclerView feesView;
-    @BindView(R.id.my_toolbar) Toolbar myToolbar;
+    @BindView(R.id.txt_fees_date)
+    TextView feesDate;
+    @BindView(R.id.txt_fees_value)
+    TextView feesAmount;
+    @BindView(R.id.txt_total)
+    TextView totalAmountText;
+    @BindView(R.id.txt_paid)
+    TextView paidAmountText;
+    @BindView(R.id.txt_remaining)
+    TextView remainingAmountText;
+    @BindView(R.id.recycle_fees_list)
+    RecyclerView feesView;
+    @BindView(R.id.my_toolbar)
+    Toolbar myToolbar;
 
     public void setFees(Fees fees) {
         this.fees = fees;
@@ -63,6 +73,7 @@ public class FeesFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mContext = getContext();
         setHasOptionsMenu(true);
+
     }
 
     @Override
@@ -72,6 +83,14 @@ public class FeesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fees, container, false);
         ButterKnife.bind(this, view);
         myToolbar.setTitle("Fees");
+        ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
+        try {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(ContextCompat.getDrawable(getActivity(), R.drawable.ic_arrow_back_black_24dp));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         populateUI();
         return view;
 
@@ -93,6 +112,10 @@ public class FeesFragment extends Fragment {
         }
 
     }
+
+
+
+
 
     private void populateList() {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
