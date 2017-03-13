@@ -64,7 +64,7 @@ public class AttendanceFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_attendance, container, false);
         ButterKnife.bind(this, view);
-        myToolbar.setTitle("Attendance");
+        myToolbar.setTitle(getString(R.string.attendance));
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
         try {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);

@@ -80,7 +80,7 @@ public class FeesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fees, container, false);
         ButterKnife.bind(this, view);
-        myToolbar.setTitle("Fees");
+        myToolbar.setTitle(getString(R.string.fees));
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
         try {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
