@@ -18,6 +18,11 @@ import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.udacity.akki.capstone.LoginActivity;
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.adapter.NotificationSlidePagerAdapter;
@@ -32,8 +37,11 @@ import com.udacity.akki.capstone.model.User;
 import com.udacity.akki.capstone.network.ApiClient;
 import com.udacity.akki.capstone.network.ApiInterface;
 import com.udacity.akki.capstone.utility.AnalyticsUtil;
+import com.udacity.akki.capstone.utility.FirebaseDatabaseUtil;
 import com.udacity.akki.capstone.utility.Util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -57,7 +65,7 @@ public class LandingActivity extends AppCompatActivity {
     @BindView(R.id.txt_fees_date)
     TextView feesDate;
     @BindView(R.id.txt_test_date)
-    TextView testDate;
+    TextView testDate   ;
     @BindView(R.id.txt_test_name)
     TextView testName;
     @BindView(R.id.txt_test_score)
@@ -83,12 +91,28 @@ public class LandingActivity extends AppCompatActivity {
         dialog.setMessage("Loading Data. Please Wait...");
         dialog.show();
         // Write a message to the database
-        /*FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        FirebaseDatabase database = FirebaseDatabaseUtil.getDatabase();
+        DatabaseReference myRef = database.getReference("Users").child(Util.getUid(mContext));
+        myRef.keepSynced(true);
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                user = dataSnapshot.getValue(User.class);
+                updateUI();
+                //Log.d(LOG_TAG, "Value is: " + user);
+            }
 
-        myRef.setValue("Hello, World!");*/
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(LOG_TAG, "Failed to read value.", error.toException());
+            }
+        });
 
-        ApiInterface apiService =
+        /*ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
         Call<User> call = apiService.getUserData(Util.getUid(mContext), Util.getToken(mContext));
@@ -105,7 +129,7 @@ public class LandingActivity extends AppCompatActivity {
                 // Log error here since request failed
                 Log.e(LOG_TAG, t.toString());
             }
-        });
+        });*/
 
     }
 
@@ -231,12 +255,12 @@ public class LandingActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private Notification[] populateNotifications(User user) {
-        if (user.getDetail().getNotification().length == 0) {
-            Notification[] tempNotifications = new Notification[3];
-            tempNotifications[0] = new Notification("Notification 1", "1");
-            tempNotifications[1] = new Notification("Notification 2", "2");
-            tempNotifications[2] = new Notification("Notification 3", "3");
+    private List<Notification> populateNotifications(User user) {
+        if (user.getDetail().getNotification().size() == 0) {
+            List<Notification> tempNotifications = new ArrayList<>();
+            tempNotifications.add(new Notification("Notification 1", "1"));
+            tempNotifications.add(new Notification("Notification 2", "2"));
+            tempNotifications.add(new Notification("Notification 3", "3"));
             return tempNotifications;
         } else {
             return user.getDetail().getNotification();
@@ -248,7 +272,7 @@ public class LandingActivity extends AppCompatActivity {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
             public void run() {
-                if (currentPage == user.getDetail().getNotification().length - 1) {
+                if (currentPage == user.getDetail().getNotification().size() - 1) {
                     currentPage = 0;
                 }
                 mPager.setCurrentItem(currentPage++, true);

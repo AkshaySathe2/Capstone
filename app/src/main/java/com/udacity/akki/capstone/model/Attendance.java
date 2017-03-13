@@ -2,20 +2,22 @@ package com.udacity.akki.capstone.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by 836158 on 20-02-2017.
  */
 public class Attendance {
 
     @SerializedName("s_year")
-    private MyYear[] myYear;
+    private List<MyYear> myYear;
 
-    public MyYear[] getMyYear()
+    public List<MyYear> getMyYear()
     {
         return myYear;
     }
 
-    public void setMyYear(MyYear[] myYear)
+    public void setMyYear(List<MyYear> myYear)
     {
         this.myYear = myYear;
     }

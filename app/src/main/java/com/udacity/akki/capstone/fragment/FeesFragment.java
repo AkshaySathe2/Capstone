@@ -110,7 +110,7 @@ public class FeesFragment extends Fragment {
 
     private void populateUI() {
 
-        if (fees == null || fees.getInstallment().length == 0) {
+        if (fees == null || fees.getInstallment().size() == 0) {
             Util.showToast(mContext, getString(R.string.no_data_available));
         } else {
 

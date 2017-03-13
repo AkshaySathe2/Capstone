@@ -1,20 +1,22 @@
 package com.udacity.akki.capstone.model;
 
+import java.util.List;
+
 /**
  * Created by 836158 on 14-02-2017.
  */
 
 public class Fees {
 
-    private Installment[] installment;
+    private List<Installment> installment;
 
     private String total_fees;
 
-    public Installment[] getInstallment() {
+    public List<Installment> getInstallment() {
         return installment;
     }
 
-    public void setInstallment(Installment[] installment) {
+    public void setInstallment(List<Installment> installment) {
         this.installment = installment;
     }
 

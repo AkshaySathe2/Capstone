@@ -32,9 +32,9 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.My
     private int displayedMonth;
     private int displayedYear;
 
-    public AttendanceAdapter(MyDate[] dates, int displayedYear, int displayedMonth) {
+    public AttendanceAdapter(List<MyDate> dates, int displayedYear, int displayedMonth) {
         myDates = new ArrayList<>();
-        myDates.addAll(Arrays.asList(dates));
+        myDates.addAll(dates);
         this.displayedMonth = displayedMonth;
         this.displayedYear = displayedYear;
         matchStartEndDays();

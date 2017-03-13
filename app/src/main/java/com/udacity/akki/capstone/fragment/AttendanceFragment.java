@@ -25,6 +25,7 @@ import com.udacity.akki.capstone.model.MyMonth;
 import com.udacity.akki.capstone.model.MyYear;
 
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -87,7 +88,7 @@ public class AttendanceFragment extends Fragment {
             displayedMonth+=1;
         }
         currentDisplayMonth.setText(listOfMonths[displayedMonth]);
-        MyDate[] dates=getAttendanceStatus(displayedYear,displayedMonth);
+        List<MyDate> dates=getAttendanceStatus(displayedYear,displayedMonth);
         populateDates(dates);
     }
 
@@ -100,7 +101,7 @@ public class AttendanceFragment extends Fragment {
             displayedMonth-=1;
         }
         currentDisplayMonth.setText(listOfMonths[displayedMonth]);
-        MyDate[] dates=getAttendanceStatus(displayedYear,displayedMonth);
+        List<MyDate> dates=getAttendanceStatus(displayedYear,displayedMonth);
         populateDates(dates);
     }
 
@@ -110,11 +111,11 @@ public class AttendanceFragment extends Fragment {
         displayedMonth=month;
         displayedYear=year;
         currentDisplayMonth.setText(listOfMonths[displayedMonth]);
-        MyDate[] dates=getAttendanceStatus(year,month);
+        List<MyDate> dates=getAttendanceStatus(year,month);
         populateDates(dates);
     }
 
-    private void populateDates(MyDate[] dates) {
+    private void populateDates(List<MyDate> dates) {
         if(dates!=null){
             RecyclerView.LayoutManager lLayout = new GridLayoutManager(mContext, 7);
             attendanceView.setHasFixedSize(true);
@@ -132,7 +133,7 @@ public class AttendanceFragment extends Fragment {
         }
     }
 
-    private MyDate[] getAttendanceStatus(int year, int month) {
+    private List<MyDate> getAttendanceStatus(int year, int month) {
         MyYear requiredYear=attendance.fetchRequiredYear(year);
         if(requiredYear!=null){
             MyMonth requiredMonth=requiredYear.fetchRequiredMonth(listOfMonths[month]);

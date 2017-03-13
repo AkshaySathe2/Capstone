@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.udacity.akki.capstone.R;
 import com.udacity.akki.capstone.model.Installment;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -24,10 +26,11 @@ import butterknife.ButterKnife;
 public class InstallmentAdapter extends RecyclerView.Adapter<InstallmentAdapter.MyViewHolder> {
 
     private Context mContext;
-    private Installment[] installments;
+    private List<Installment> installments= new ArrayList<>();
 
-    public InstallmentAdapter(Installment[] installment) {
-        installments=installment;
+    public InstallmentAdapter(List<Installment> installment) {
+        installments.clear();
+        installments.addAll(installment);
     }
 
     @Override
@@ -41,7 +44,7 @@ public class InstallmentAdapter extends RecyclerView.Adapter<InstallmentAdapter.
 
     @Override
     public void onBindViewHolder(InstallmentAdapter.MyViewHolder holder, int position) {
-        Installment installment = installments[position];
+        Installment installment = installments.get(position);
         holder.installmentName.setText(String.format(Locale.ENGLISH,"Installment %d", position + 1));
         holder.installmentDate.setText(installment.getDate());
         holder.installmentValue.setText(installment.getAmount());
@@ -52,7 +55,7 @@ public class InstallmentAdapter extends RecyclerView.Adapter<InstallmentAdapter.
 
     @Override
     public int getItemCount() {
-        return installments.length;
+        return installments.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

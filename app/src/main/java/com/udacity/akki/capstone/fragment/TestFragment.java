@@ -24,6 +24,7 @@ import com.udacity.akki.capstone.utility.Util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -35,7 +36,7 @@ import butterknife.ButterKnife;
 public class TestFragment extends Fragment {
 
 
-    private Test[] test;
+    private List<Test> test;
     private Context mContext;
     private TestAdapter mAdapter;
     @BindView(R.id.my_toolbar) Toolbar myToolbar;
@@ -76,7 +77,7 @@ public class TestFragment extends Fragment {
     }
 
     private void populateUI() {
-        if (test == null || test.length == 0) {
+        if (test == null || test.size() == 0) {
             Util.showToast(mContext, getString(R.string.no_data_available));
         } else {
             populateHeading();
@@ -101,7 +102,7 @@ public class TestFragment extends Fragment {
         testDate.setText(latestTest.getDoa());
     }
 
-    public void setTest(Test[] test) {
+    public void setTest(List<Test> test) {
         this.test = test;
     }
 

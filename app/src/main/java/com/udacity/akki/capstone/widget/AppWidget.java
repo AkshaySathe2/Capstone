@@ -16,6 +16,8 @@ import com.udacity.akki.capstone.network.ApiClient;
 import com.udacity.akki.capstone.network.ApiInterface;
 import com.udacity.akki.capstone.utility.Util;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,10 +68,10 @@ public class AppWidget extends AppWidgetProvider {
 
     private static void updateUI(User user, RemoteViews views, AppWidgetManager appWidgetManager, int appWidgetId) {
         Test test=user.getDetail().getLatestTestScores();
-        Notification[] notification=user.getDetail().getNotification();
+        List<Notification> notification=user.getDetail().getNotification();
         views.setTextViewText(R.id.appwidget_text_test_subject, test.getTopic());
         views.setTextViewText(R.id.appwidget_text_test_score, test.getMarksObtained()+" / "+test.getMaxMarks());
-        views.setTextViewText(R.id.appwidget_text_notifications, notification[0].getMessage());
+        views.setTextViewText(R.id.appwidget_text_notifications, notification.get(0).getMessage());
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

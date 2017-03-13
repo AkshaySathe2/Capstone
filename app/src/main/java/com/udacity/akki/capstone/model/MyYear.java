@@ -2,6 +2,8 @@ package com.udacity.akki.capstone.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by 836158 on 20-02-2017.
  */
@@ -11,31 +13,27 @@ public class MyYear {
     private String value;
 
     @SerializedName("s_month")
-    private MyMonth[] myMonth;
+    private List<MyMonth> myMonth;
 
-    public String getValue ()
-    {
+    public String getValue() {
         return value;
     }
 
-    public void setValue (String value)
-    {
+    public void setValue(String value) {
         this.value = value;
     }
 
-    public MyMonth[] getMyMonth()
-    {
+    public List<MyMonth> getMyMonth() {
         return myMonth;
     }
 
-    public void setMyMonth(MyMonth[] myMonth)
-    {
+    public void setMyMonth(List<MyMonth> myMonth) {
         this.myMonth = myMonth;
     }
 
-    public MyMonth fetchRequiredMonth(String month){
-        for(MyMonth m:myMonth){
-            if(m.getValue().equalsIgnoreCase(month)){
+    public MyMonth fetchRequiredMonth(String month) {
+        for (MyMonth m : myMonth) {
+            if (m.getValue().equalsIgnoreCase(month)) {
                 return m;
             }
         }
@@ -43,9 +41,8 @@ public class MyYear {
     }
 
     @Override
-    public String toString()
-    {
-        return "ClassPojo [value = "+value+", myMonth = "+ myMonth +"]";
+    public String toString() {
+        return "ClassPojo [value = " + value + ", myMonth = " + myMonth + "]";
     }
 
 }

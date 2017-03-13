@@ -1,6 +1,8 @@
 package com.udacity.akki.capstone.model;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 836158 on 14-02-2017.
@@ -8,19 +10,19 @@ package com.udacity.akki.capstone.model;
 
 public class Detail {
 
-    private Test[] test;
+    private List<Test> test=new ArrayList<>();
 
     private Attendance attendance;
 
-    private Notification[] notification;
+    private List<Notification> notification;
 
     private Fees fees;
 
-    public Test[] getTest() {
+    public List<Test> getTest() {
         return test;
     }
 
-    public void setTest(Test[] test) {
+    public void setTest(List<Test> test) {
         this.test = test;
     }
 
@@ -32,11 +34,11 @@ public class Detail {
         this.attendance = attendance;
     }
 
-    public Notification[] getNotification() {
+    public List<Notification> getNotification() {
         return notification;
     }
 
-    public void setNotification(Notification[] notification) {
+    public void setNotification(List<Notification> notification) {
         this.notification = notification;
     }
 

@@ -12,6 +12,8 @@ import com.udacity.akki.capstone.model.Installment;
 import com.udacity.akki.capstone.model.Test;
 import com.udacity.akki.capstone.utility.Util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -24,10 +26,11 @@ import butterknife.ButterKnife;
 public class TestAdapter extends RecyclerView.Adapter<TestAdapter.MyViewHolder> {
 
     private Context mContext;
-    private Test[] tests;
+    private List<Test> tests=new ArrayList<>();
 
-    public TestAdapter(Test[] test) {
-        tests=test;
+    public TestAdapter(List<Test> test) {
+        tests.clear();
+        tests.addAll(test);
     }
 
     @Override
@@ -41,7 +44,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Test test=tests[position];
+        Test test=tests.get(position);
         holder.serialNo.setText(String.format("%s.", String.valueOf(position + 1)));
         holder.testDate.setText(test.getDoa());
         holder.subject.setText(test.getSubject());
@@ -51,7 +54,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        return tests.length;
+        return tests.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
